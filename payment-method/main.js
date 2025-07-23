@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const creditCard_1 = require("./src/creditCard");
+const payPal_1 = require("./src/payPal");
+const paymentProcessor_1 = require("./src/paymentProcessor");
+const cc = new creditCard_1.CreditCard(1500, "1234567890123456");
+const paypal = new payPal_1.PayPal(999, "user@example.com");
+const processor = new paymentProcessor_1.PaymentProcessor();
+processor.processPayment(cc);
+processor.processPayment(paypal);
