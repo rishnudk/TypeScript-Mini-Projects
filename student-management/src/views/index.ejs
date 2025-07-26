@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #50b3a2;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        #showcase {
+            min-height: 400px;
+            background: url('showcase.jpg') no-repeat 0 -400px;
+            text-align: center;
+            color: #fff;
+        }
+        #showcase h1 {
+            margin-top: 100px;
+            font-size: 55px;
+            margin-bottom: 10px;
+        }
+        #showcase p {
+            font-size: 20px;
+        }
+        .button {
+            display: inline-block;
+            color: #fff;
+            background: #e8491d;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #50b3a2;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        .action-buttons button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            background: #50b3a2;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .action-buttons button:hover {
+            background: #333;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Student Management System</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Students List</h2>
+        <button id="openModalBtn" class="button">Add Student</button>
+        <% if(students && students.length > 0) { %>
+            
+        <table>
+            <thead>
+                <tr>
+                    <th>Serial Number</th>
+                    <th>Student Name</th>
+                    <th>Student Age</th>
+                    <th>Student Grade</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < students.length; i ++) { %>
+                <tr>
+                    <td><%= i + 1 %></td>
+                    <td><%= students[i].name %></td>
+                    <td><%= students[i].age %></td>
+                    <td><%= students[i].grade %></td>
+                    <td class="action-buttons">
+                        <button onclick="openEditModal('<%= i %>')">Edit</button>
+                        <button onclick="deleteStudent('<%= students[i]._id %>')">Delete</button>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+        <% } %>
+    </div>
+
+     <!-- edit Modal -->
+      <% if(students && students.length > 0) { %>
+        <% for(let i = 0; i < students.length; i++) { %>
+     <div id="editModal<%= i %>" class="modal">
+        <div class="modal-content">
+            <span onclick="closeEditModal('<%= i %>')" class="close">&times;</span>
+            <h2>Add Student</h2>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input type="text" value="<%= students[i].name %>" id="studentName<%= i %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentClass">Student Age</label>
+                    <input type="text" value="<%= students[i].age %>" id="studentAge<%= i %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentGrade">Student Grade</label>
+                    <input type="text" value="<%= students[i].grade %>" id="studentGrade<%= i %>" required>
+                </div>
+                <button type="button" onclick="editStudents('<%= i %>', '<%= students[i]._id %>')" class="button">Submit</button>
+            </form>
+        </div>
+    </div>
+    <% } %>
+    <% } %>
+
+     <!-- Add Modal -->
+     <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span id="add-close" class="close">&times;</span>
+            <h2>Add Student</h2>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input type="text" id="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentClass">Student Age</label>
+                    <input type="text" id="studentAge" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentGrade">Student Grade</label>
+                    <input type="text" id="studentGrade" required>
+                </div>
+                <button type="button" id="submit-button" class="button">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const modal = document.getElementById("myModal");
+        const editModal = document.getElementById("editModal");
+
+        const btn = document.getElementById("openModalBtn");
+        const editModalBtn = document.getElementById("editModalBtn");
+
+        const span = document.getElementById("add-close");
+        const editClose = document.getElementById("edit-close");
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function openEditModal(id) {
+            document.getElementById(`editModal${id}`).style.display = "block";
+        }
+
+        function closeEditModal(id) {
+            document.getElementById(`editModal${id}`).style.display = "none";
+        }
+
+
+        document.getElementById('submit-button').addEventListener('click', () => {
+            const name = document.getElementById('studentName').value;
+            const age = document.getElementById('studentAge').value;
+            const grade = document.getElementById('studentGrade').value;
+            if(name && age && grade) {
+                addFetch(name, age, grade);
+            } else {
+                alert('failed1')
+            }
+        });
+
+        function editStudents(index, studentId) {
+            const name = document.getElementById(`studentName${index}`).value;
+            const age = document.getElementById(`studentAge${index}`).value;
+            const grade = document.getElementById(`studentGrade${index}`).value;
+            if(name && age && grade) {
+                updateFetch(studentId, name, age, grade);
+            } else {
+                alert('failed3')
+            }
+        }
+
+        async function addFetch(name, age, grade) {
+            try {
+                const response = await fetch('/students', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body:JSON.stringify({name, age, grade})
+                });
+                const data = await response.json();
+                if(!response.ok) {
+                    throw new Error(data.message);
+                }
+                if(data.success) {
+                    window.location.reload();
+                }
+            } catch (error) {
+                alert('failed2')
+            }
+        }
+
+        async function updateFetch(studentId, name, age, grade) {
+            try {
+                const response = await fetch(`/students/${studentId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({name, age, grade})
+                });
+                const data = await response.json();
+                if(!response.ok) {
+                    throw new Error(data.message);
+                }
+                if(data.success) {
+                    window.location.reload();
+                }
+            } catch (error) {
+                alert('failed3')
+            }
+        }
+
+        async function deleteStudent(studentId) {
+            try {
+                const response = await fetch(`/students/${studentId}`, {method: 'DELETE'});
+                const data = await response.json();
+                if(!response.ok) {
+                    throw new Error(data.message);
+                }
+                if(data.success) {
+                    window.location.reload();
+                }
+            } catch (error) {
+                alert('failed5')
+            }
+        }
+    </script>
+</body>
+</html>

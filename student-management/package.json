@@ -1,0 +1,28 @@
+{
+  "name": "student-management",
+  "version": "1.0.0",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "build": "tsc && npm run copy-views",
+    "copy-views": "copyfiles -u 1 src/views/**/* dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.1",
+    "@types/mongoose": "^5.11.96",
+    "copyfiles": "^2.4.1"
+  }
+}
