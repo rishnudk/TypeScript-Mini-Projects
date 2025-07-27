@@ -16,7 +16,7 @@ type Employee = { id: number};
 
 type Workerr = person  & Employee;
 
-const workerId : Workerr = {
+const workerId : Workerr = { 
     name : 'rishnu',
     id : 11
 }
