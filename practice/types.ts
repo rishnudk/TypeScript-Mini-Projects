@@ -1,73 +1,73 @@
 
-// union  : A value can be any one of the specified types.
+// // union  : A value can be any one of the specified types.
 
-// let value : string | number;
+// // let value : string | number;
 
-// value = 'hello'
-// value = 123
-// value = true;
-
-
-//intersection  A value must have all types combined
-
-type person = { name: string};
-
-type Employee = { id: number};
-
-type Workerr = person  & Employee;
-
-const workerId : Workerr = { 
-    name : 'rishnu',
-    id : 11
-}
+// // value = 'hello'
+// // value = 123
+// // value = true;
 
 
-// extends    
- //   means "inherits from" or "is based on" another type
- //    If Type B extends Type A, then Type B gets everything from Type A, and can add more.
+// //intersection  A value must have all types combined
 
-interface Persons {
-    name : string;
-    age : number;
-}
+// type person = { name: string};
 
-interface Empp extends Persons {
-    empId: number;
-}
+// type Employee = { id: number};
 
+// type Workerr = person  & Employee;
 
-const e : Empp  = {
-    name : 'rishnu',
-    age : 11,
-    empId : 33
-}
+// const workerId : Workerr = { 
+//     name : 'rishnu',
+//     id : 11
+// }
 
 
-// extends wit h class
+// // extends    
+//  //   means "inherits from" or "is based on" another type
+//  //    If Type B extends Type A, then Type B gets everything from Type A, and can add more.
 
-class Animal {
-    move() {
-        console.log('moving')
-    }
-}
+// interface Persons {
+//     name : string;
+//     age : number;
+// }
 
-class Dog extends Animal {
-    bark() {
-        console.log('barking')
-    }
-}
-
-const d = new Dog();
-d.move();
-d.bark();
+// interface Empp extends Persons {
+//     empId: number;
+// }
 
 
-// optional properties 
+// const e : Empp  = {
+//     name : 'rishnu',
+//     age : 11,
+//     empId : 33
+// }
 
-interface P {
-    name : string;
-    age? : number;
-}
 
-const p1 : P = { name : 'rishnu'}
-const p2 : P = {age : 12}
+// // extends wit h class
+
+// class Animal {
+//     move() {
+//         console.log('moving')
+//     }
+// }
+
+// class Dog extends Animal {
+//     bark() {
+//         console.log('barking')
+//     }
+// }
+
+// const d = new Dog();
+// d.move();
+// d.bark();
+
+
+// // optional properties 
+
+// interface P {
+//     name : string;
+//     age? : number;
+// }
+
+// const p1 : P = { name : 'rishnu'}
+// const p2 : P = {age : 12}

@@ -1,0 +1,13 @@
+# Ignore build output
+/dist
+
+# Node modules
+/node_modules
+
+# Logs
+*.log
+
+# TypeScript cache
+*.tsbuildinfo
+
+ 

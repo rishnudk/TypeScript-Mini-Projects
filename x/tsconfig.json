@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",             // Modern JS support
+    "module": "CommonJS",           // For Node.js
+    "rootDir": "src",               // Where your TypeScript files are
+    "outDir": "dist",               // Where compiled JS will go
+    "strict": true,                 // All strict type checks
+    "esModuleInterop": true,        // Allow CommonJS + ES6 imports
+    "skipLibCheck": true,           // Skip type checks on .d.ts files
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

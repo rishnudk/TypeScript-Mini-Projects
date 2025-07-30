@@ -202,3 +202,35 @@ if(isString(value11)) {
     console.log(value11.toUpperCase());
     
 }
+
+  // intersection 
+  //combine multiple types into one
+  type A = { name : string}
+  type B = {age : number}
+
+  type C = A & B
+  const c : C = {
+    name : 'rishnu',
+    age:11
+  }
+
+  //method over loading 
+  //TS support method/function overloading using multiple signature
+  function add(a:number, b:number):number;
+  function add(a:string, b:string):string; 
+  function add(a:any, b:any):any{
+    return a + b;
+  }
+  console.log(add(2,3));
+  console.log(add('hello','hi'));
+
+  //  function to return strings from
+  //  an input array containing any datatype
+
+  function getString(arr: any[]):string[] {
+    return arr.filter(item => typeof item === 'string')
+  }
+  console.log(getString(['hi',23,true,{name:'dk'},'hello']));
+  
+  
+  
