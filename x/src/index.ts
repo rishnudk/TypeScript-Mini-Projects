@@ -75,10 +75,106 @@ function toArray<T>(...args:T[]): T[] {
 console.log(toArray<string>('hu','yy'));
 
 
+// abstraction using abstract class
+
+abstract class Person {
+    abstract dance() : void;
+
+    swim() : void {
+        console.log('swimm');
+        
+    }
+}
+
+class Human extends Person {
+    dance () : void {
+        console.log('dancing');
+        
+    }
+}
+
+const h = new Human()
+h.dance()
+h.swim()
+
+
+//interface
+
+interface Vehicle {
+    start() : void
+    stop() : void
+}
+
+class Bike implements Vehicle { 
+    start(): void {
+        console.log('bike starts');
+        
+    }
+    stop(): void {
+        console.log('it stoppeed');
+        
+    }
+}
+
+const b  = new Bike()
+b.start()
+b.stop()
+
+ // omit example
+type Order = {
+    id : number;
+    name: string
+}
+
+type NewOrder = Omit<Order, 'name' >
+
+const t : NewOrder = {id: 2 }
+console.log(t);
+
+//custom class decorator
+
+function Logger(constructor : Function) {
+    
+    console.log('constructor created');
+    
+}
+
+@Logger
+class Check {
+    constructor () {
+      
+        console.log('instance created');
+        
+    }
+}
+const l = new Check()
+console.log(l);
 
 
 
+// tuple example
+
+let person : [string, number]
+person = ['dk' , 11]
+console.log(person);
 
 
+// class with constructor
 
+class Prsn {
+    name :string
+    age : number
 
+    constructor(name : string, age : number) {
+        this.name = name
+        this.age = age
+    }
+
+    greet() : void {
+        console.log(`${this.name} ${this.age}`);
+        
+    }
+}
+
+const p1 = new Prsn('dk', 22)
+console.log(p1);
