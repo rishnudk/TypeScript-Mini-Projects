@@ -234,3 +234,30 @@ if(isString(value11)) {
   
   
   
+// mapped example
+
+type User = {
+    name : string;
+    age : number;
+}
+
+type OneUser = {
+    [one in keyof User]? : User[one]
+}
+
+const OneUser : OneUser = {
+    name : 'rishnu'
+}
+
+console.log(OneUser);
+
+
+
+//exclude
+
+type Fruits = 'a' | 'b' | 'c'
+type Newfruits = Exclude<Fruits, 'b' > 
+let f : Newfruits;
+f = 'a'
+f = 'c'
+f = 'b'

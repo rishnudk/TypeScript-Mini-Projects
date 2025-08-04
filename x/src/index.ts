@@ -178,3 +178,4 @@ class Prsn {
 
 const p1 = new Prsn('dk', 22)
 console.log(p1);
+ 
